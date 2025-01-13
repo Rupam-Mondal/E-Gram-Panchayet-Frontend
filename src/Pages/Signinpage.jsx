@@ -1,9 +1,26 @@
-function Signinpage(){
+import { useState } from "react";
+import Signoptions from "../Components/SignupOptions";
+
+function SignUppage() {
     return (
         <>
-            <h1 className="bg-red-100">This is signin page</h1>
+            <div className="h-[100vh] w-full flex">
+                {/* left section */}
+
+                <div className="w-1/2 h-full flex justify-center items-center">
+                    <Signoptions/>
+                </div>
+
+
+
+                {/* Right section */}
+
+                <div className="w-1/2 h-full">
+                    
+                </div>
+            </div>
         </>
     )
 }
 
-export default Signinpage;
+export default SignUppage;

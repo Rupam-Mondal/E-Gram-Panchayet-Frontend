@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import Signinpage from "../Pages/Signinpage";
+import SignUppage from "../Pages/Signinpage";
 
 function Routing(){
     return (
         <>
             <Routes>
-                <Route path="/signin" element={<Signinpage/>}/>
+                <Route path="/signin" element={<SignUppage/>}/>
             </Routes>
         </>
     )
