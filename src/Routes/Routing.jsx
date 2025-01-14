@@ -5,7 +5,7 @@ function Routing(){
     return (
         <>
             <Routes>
-                <Route path="/signin" element={<SignUppage/>}/>
+                <Route path="/signup" element={<SignUppage/>}/>
             </Routes>
         </>
     )
