@@ -6,6 +6,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import useSignin from "@/Hooks/ApiHooks/useSiginin";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,8 +15,15 @@ function Signincard() {
     const [username , setUsername] = useState(null);
     const [email , setEmail] = useState(null);
     const [password , setPassword] = useState(null);
+    const { isPending,isSuccess,error,mutateAsync:SigninReqToBackend } = useSignin();
     async function handleSubmit(){
-        
+        const SigninObject = {
+            email:email,
+            username:username,
+            password:password
+        }
+
+        await SigninReqToBackend(SigninObject)
     }
     return (
         <>
