@@ -23,7 +23,11 @@ function Signincard() {
             password:password
         }
 
-        await SigninReqToBackend(SigninObject)
+        try {
+            await SigninReqToBackend(SigninObject)
+        } catch (error) {
+            console.log("Signin failed");
+        }
     }
     return (
         <>

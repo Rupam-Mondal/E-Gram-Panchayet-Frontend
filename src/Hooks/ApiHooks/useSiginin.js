@@ -8,11 +8,11 @@ function useSignin(){
         mutationFn: SigninRequest,
         onSuccess:(response) => {
             if (response.success == false) {
-                console.log(response);
                 throw new Error(response.message);
             }
             else{
-                localStorage.setItem('Token', response.data.token);
+                console.log(response)
+                localStorage.setItem('token', response.data.token);
                 const userObject = JSON.stringify(response.data);
                 localStorage.setItem('user', userObject);
                 setAuth({
