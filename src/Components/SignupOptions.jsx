@@ -1,7 +1,7 @@
-import { useState } from "react";
+import useSignup from "@/Hooks/ContextHooks/useSignup";
 
 function Signoptions() {
-    const [userType, setUserType] = useState('');
+    const { userType, setUserType } = useSignup();
     return (
         <>
             <div className="flex items-center justify-center w-1/4 p-2 rounded-xl shadow-xl gap-3">
@@ -16,9 +16,9 @@ function Signoptions() {
 
                 <div
                     onClick={() => {
-                        setUserType("Admin");
+                        setUserType("Staff");
                     }}
-                    className={`px-5 py-2 text-center ${userType === 'Admin' ? 'bg-green-500 text-white' : 'hover:bg-green-500 hover:text-white'} rounded-md shadow-md cursor-pointer border border-green-600 transition-all duration-300`}
+                    className={`px-5 py-2 text-center ${userType === 'Staff' ? 'bg-green-500 text-white' : 'hover:bg-green-500 hover:text-white'} rounded-md shadow-md cursor-pointer border border-green-600 transition-all duration-300`}
                 >
                     Staff
                 </div>

@@ -1,9 +1,12 @@
+import { AppcontextProvider } from "./Context/Appcontext";
 import Routing from "./Routes/Routing";
 
 function App(){
   return (
     <>
-      <Routing/>
+      <AppcontextProvider>
+        <Routing />
+      </AppcontextProvider>
     </>
   )
 }
