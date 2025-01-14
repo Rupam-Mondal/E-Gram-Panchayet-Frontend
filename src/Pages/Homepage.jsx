@@ -4,7 +4,7 @@ function Homepage(){
     const { auth, setAuth } = useAuth();
     return (
         <>
-            <div className="bg-red-400 h-[100vh]"></div>
+            <div className="bg-red-400 h-[100vh]">{auth?.user?.role}</div>
         </>
     )
 }
