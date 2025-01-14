@@ -88,9 +88,6 @@ function Signupcard({ code }) {
                     </div>
                     {code && (
                         <div>
-                            <label htmlFor="code" className="block text-sm font-medium">
-                                Code
-                            </label>
                             <input
                                 id="code"
                                 type="text"

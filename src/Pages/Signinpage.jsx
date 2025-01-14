@@ -9,15 +9,22 @@ function SignUppage() {
     const { userType, setUserType } = useSignup();
     useEffect(() => {
         console.log(userType)
-    })
+    } , [userType])
     return (
         <>
             <div className="h-[100vh] w-full flex">
-                {/* left section */}
-
                 <div className="w-full h-full flex flex-col justify-center items-center">
-                    <Signoptions/>
-                    <Signupcard/>
+                    <Signoptions />
+                    {
+                        userType == 'Officer' || userType == 'Staff' ? (
+                            <Signupcard
+                                code={'code'}
+                            />
+                        ) : (
+                            <Signupcard
+                            />
+                        )
+                    }
                 </div>
             </div>
         </>
