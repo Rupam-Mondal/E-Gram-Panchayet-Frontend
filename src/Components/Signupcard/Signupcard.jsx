@@ -7,8 +7,10 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { useSignupapi } from "@/Hooks/ApiHooks/useSignup";
+import useSignup from "@/Hooks/ContextHooks/useSignup";
 import { TriangleAlertIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signupcard({ code }) {
     const [username , setUsername] = useState(null);
@@ -16,15 +18,52 @@ function Signupcard({ code }) {
     const [password , setPassword] = useState(null);
     const [confirmpassword , setConfirmPassword] = useState(null);
     const [usercode , setUsercode] = useState(null);
+    const { userType, setUserType } = useSignup();
+    const navigate = useNavigate();
 
     const { isPending,isSuccess,error,mutateAsync:SignupRequest } = useSignupapi();
 
     const [validationError , setValidationError] = useState(false);
-    function handleSubmit(){
+    async function handleSubmit(){
         if(!username || !email || !password || !confirmpassword){
-            setValidationError(true)
+            setValidationError(true);
+            return;
+        }
+        if(usercode){
+            const SignupObject = {
+                username: username,
+                email: email,
+                password: password,
+                role:userType,
+                code:usercode
+            }
+
+            try {
+                await SignupRequest(SignupObject);
+            } catch (error) {
+                console.log("Something went wrong")
+            }
+            return;
+        }
+        const SignupObject = {
+            username: username,
+            email: email,
+            password: password,
+            code: usercode
+        }
+        try {
+            await SignupRequest(SignupObject);
+        } catch (error) {
+            console.log("Something went wrong")
         }
     }
+
+    useEffect(() => {
+        if(isSuccess){
+            console.log(isSuccess)
+            navigate('/home')
+        }
+    } , [isSuccess])
     return (
         <Card className="w-1/4 mx-auto shadow-lg p-3 bg-white">
             <CardHeader>
@@ -37,6 +76,14 @@ function Signupcard({ code }) {
                                 <div className="h-10 bg-destructive/75 rounded-md flex items-center px-3">
                                     <TriangleAlertIcon color="red"/>
                                     <span className="ml-3 text-black">All fields are required</span>
+                                </div>
+                            )
+                        }
+                        {
+                            error && (
+                                <div className="h-10 bg-destructive/75 rounded-md flex items-center px-3">
+                                    <TriangleAlertIcon color="red" />
+                                    <span className="ml-3 text-black">Signup failed, try again</span>
                                 </div>
                             )
                         }
@@ -106,7 +153,9 @@ function Signupcard({ code }) {
             </CardContent>
             <CardFooter>
                 <button className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    onClick={handleSubmit}
+                    onClick={async () => {
+                        await handleSubmit();
+                    }}
                 >
                     Sign Up
                 </button>

@@ -6,6 +6,7 @@ export function useSignupapi(){
         mutationFn: Signup,
         onSuccess: (data) => {
             console.log(data);
+            
         },
         onError: (data) => {
             console.log(data);
