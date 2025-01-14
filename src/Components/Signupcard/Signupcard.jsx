@@ -61,7 +61,7 @@ function Signupcard({ code }) {
     useEffect(() => {
         if (isSuccess) {
             console.log(isSuccess)
-            navigate('/home')
+            navigate('/signin')
         }
     }, [isSuccess])
     return (
@@ -150,6 +150,9 @@ function Signupcard({ code }) {
                         </div>
                     )}
                 </form>
+                <div className="text-sm mt-3">Already have account ? <span className="font-bold text-blue-800 underline cursor-pointer" onClick={() => {
+                    navigate('/signin');
+                }}>signin</span></div>
             </CardContent>
             <CardFooter>
                 {
