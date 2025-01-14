@@ -6,6 +6,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { useSignupapi } from "@/Hooks/ApiHooks/useSignup";
 import { TriangleAlertIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -15,6 +16,8 @@ function Signupcard({ code }) {
     const [password , setPassword] = useState(null);
     const [confirmpassword , setConfirmPassword] = useState(null);
     const [usercode , setUsercode] = useState(null);
+
+    const { isPending,isSuccess,error,mutateAsync:SignupRequest } = useSignupapi();
 
     const [validationError , setValidationError] = useState(false);
     function handleSubmit(){
