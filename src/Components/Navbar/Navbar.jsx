@@ -15,7 +15,7 @@ function Navbar() {
         <div className="w-full flex px-20 select-none">
             <div className="flex w-full h-full border-b-2 py-2">
                 <div className="flex items-center space-x-8">
-                    <div><SparklesText text="E Panchayet" className="text-2xl" /></div>
+                    <div className="cursor-pointer"><SparklesText text="E Panchayet" className="text-2xl" /></div>
                 </div>
 
                 <div className="flex flex-1 justify-center space-x-8 items-center">
