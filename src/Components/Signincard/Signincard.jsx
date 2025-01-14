@@ -7,20 +7,26 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import useSignin from "@/Hooks/ApiHooks/useSiginin";
-import { useState } from "react";
+import { Loader, TriangleAlertIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Signincard() {
     const navigate = useNavigate();
-    const [username , setUsername] = useState(null);
-    const [email , setEmail] = useState(null);
-    const [password , setPassword] = useState(null);
-    const { isPending,isSuccess,error,mutateAsync:SigninReqToBackend } = useSignin();
-    async function handleSubmit(){
+    const [username, setUsername] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [validationError, setValidationError] = useState(false);
+    const { isPending, isSuccess, error, mutateAsync: SigninReqToBackend } = useSignin();
+    async function handleSubmit() {
+        if (!username || !email || !password) {
+            setValidationError(true);
+            return;
+        }
         const SigninObject = {
-            email:email,
-            username:username,
-            password:password
+            email: email,
+            username: username,
+            password: password
         }
 
         try {
@@ -29,6 +35,12 @@ function Signincard() {
             console.log("Signin failed");
         }
     }
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate('/home');
+        }
+    }, [isSuccess])
     return (
         <>
             <Card className="w-1/3 mx-auto shadow-lg p-6 bg-white rounded-lg">
@@ -36,6 +48,22 @@ function Signincard() {
                     <CardTitle className="text-2xl font-bold text-center">Sign In</CardTitle>
                     <CardDescription className="text-gray-600 text-center">
                         Please fill out the form to sign in
+                        {
+                            validationError && (
+                                <div className="h-10 bg-destructive/75 rounded-md flex items-center px-3">
+                                    <TriangleAlertIcon color="red" />
+                                    <span className="ml-3 text-black">All fields are required</span>
+                                </div>
+                            )
+                        }
+                        {
+                            error && (
+                                <div className="h-10 bg-destructive/75 rounded-md flex items-center px-3 mt-3">
+                                    <TriangleAlertIcon color="red" />
+                                    <span className="ml-3 text-black">Signin failed, try again</span>
+                                </div>
+                            )
+                        }
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -79,13 +107,20 @@ function Signincard() {
                     }}>signup</span></div>
                 </CardContent>
                 <CardFooter className="mt-4 text-center">
-                    <button
-                        type="submit"
-                        className="w-full px-4 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        onClick={handleSubmit}
-                    >
-                        Sign In
-                    </button>
+                    {
+                        isPending ? (
+                            <button className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-center"
+                            >
+                                <Loader className="animate-spin" />
+                            </button>
+                        ) : (
+                            <button className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                onClick={handleSubmit}
+                            >
+                                Sign Up
+                            </button>
+                        )
+                    }
                 </CardFooter>
             </Card>
         </>
