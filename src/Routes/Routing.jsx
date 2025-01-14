@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import SignUppage from "../Pages/Signinpage";
+import SignUppage from "../Pages/Signuppage";
 
 function Routing(){
     return (
