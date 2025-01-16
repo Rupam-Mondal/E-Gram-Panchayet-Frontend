@@ -3,6 +3,7 @@ import SparklesText from "../Components/ui/sparkles-text";
 import Navbar from "@/Components/Navbar/Navbar";
 import { useEffect } from "react";
 import OfficerLandingpage from "@/Components/OfficerLandingPage/OfficerLandingpage";
+import UserLandingpage from "@/Components/UserLandingpage/Userlandingpage";
 
 function Homepage(){
     const user = JSON.parse(localStorage.getItem('user'));
@@ -15,7 +16,7 @@ function Homepage(){
                 <Navbar/>
                 <div className="px-20">
                     {user.role === 'User' && (
-                        <div className="w-full h-20 bg-blue-500"></div>
+                        <UserLandingpage/>
                     )}
                     {user.role === 'Officer' && (
                         <OfficerLandingpage/>
