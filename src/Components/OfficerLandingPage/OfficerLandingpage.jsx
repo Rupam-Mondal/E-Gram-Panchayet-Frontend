@@ -2,8 +2,13 @@ import { Plus } from "lucide-react";
 import { InteractiveHoverButton } from "../ui/interactive-hover-button";
 import AllServices from "../Allservices/Allservices";
 import TypingAnimation from "../ui/typing-animation";
+import { useCreateServiceContext } from "@/Hooks/ContextHooks/useCreateServiceContext";
 
 function OfficerLandingpage() {
+    const { openModal, setOpenModal } = useCreateServiceContext();
+    function Openmodal(){
+        setOpenModal(true);
+    }
     return (
 
         <>
@@ -21,9 +26,9 @@ function OfficerLandingpage() {
                 {/* Heading Section */}
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-2xl font-bold text-gray-800">All Services</h1>
-                    <button className="flex items-center text-white px-4 py-2 rounded-lg transition">
+                    <div className="flex items-center text-white px-4 py-2 rounded-lg transition" onClick={Openmodal}>
                         <InteractiveHoverButton className="text-black">Create Service</InteractiveHoverButton>
-                    </button>
+                    </div>
                 </div>
 
                 {/* Display All Services */}
