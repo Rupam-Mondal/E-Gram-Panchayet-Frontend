@@ -8,9 +8,16 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useNavigate } from "react-router-dom";
 
 
 function Navbar() {
+    const navigate = useNavigate();
+    function Logout(){
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        navigate('/signin');
+    }
     return (
         <div className="w-full flex px-20 select-none">
             <div className="flex w-full h-full border-b-2 py-2">
@@ -34,7 +41,9 @@ function Navbar() {
                                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
-                                    <DropdownMenuItem className="cursor-pointer">Log out <LogOut/></DropdownMenuItem>
+                                    <DropdownMenuItem className="cursor-pointer"
+                                        onClick={Logout}
+                                    >Log out <LogOut/></DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
 
