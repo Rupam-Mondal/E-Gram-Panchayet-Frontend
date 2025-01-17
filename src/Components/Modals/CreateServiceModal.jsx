@@ -9,14 +9,17 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { useQueryClient } from "@tanstack/react-query";
+import { Loader } from "lucide-react";
 import { useState } from "react";
 
 function CreateServiceModal() {
     const { openModal, setOpenModal } = useCreateServiceContext();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [image, setImage] = useState(null); // State to store the uploaded image
+    const [image, setImage] = useState(null);
     const { isPending, isSuccess, error, mutateAsync: createService } = useCreateService();
+    const queryClient = useQueryClient();
 
     const handleCreate = async () => {
         if (!title || !description || !image) {
@@ -31,6 +34,7 @@ function CreateServiceModal() {
 
         try {
             await createService(formData);
+            queryClient.invalidateQueries(['GetAllservice']);
             setOpenModal(false);
             setTitle("");
             setDescription("");
@@ -111,13 +115,25 @@ function CreateServiceModal() {
                     </button>
 
                     {/* Create Button */}
-                    <button
-                        type="button"
-                        className="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        onClick={handleCreate}
-                    >
-                        Create
-                    </button>
+                    {
+                        isPending ? (
+                            <button
+                                type="button"
+                                className="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                onClick={handleCreate}
+                            >
+                                <Loader className="animate-spin"/>
+                            </button>
+                        ) : (
+                            <button
+                                type="button"
+                                className="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                onClick={handleCreate}
+                            >
+                                Create
+                            </button>
+                        )
+                    }
                 </DialogFooter>
             </DialogContent>
         </Dialog>
