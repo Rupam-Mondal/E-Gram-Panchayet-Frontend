@@ -14,3 +14,18 @@ export async function getAllService(){
         throw error;
     }
 }
+
+export async function createService(createServiceObject){
+    try {
+        const token = localStorage.getItem('token');
+        const response = await AxiosInstance.post('/service/createService' , createServiceObject , {
+            headers:{
+                'x-access-token':token
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.log("Something went wrong");
+        throw error;
+    }
+}
