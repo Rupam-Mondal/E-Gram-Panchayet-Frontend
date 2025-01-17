@@ -20,7 +20,7 @@ function AllServices() {
                     >
                         <h2 className="text-lg font-semibold text-black mb-2">{v.title}</h2>
                         <p className="text-sm text-gray-600">
-                            {v?.description}
+                            Click for more details
                         </p>
                     </div>
                 ))}

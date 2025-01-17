@@ -29,3 +29,19 @@ export async function createService(createServiceObject){
         throw error;
     }
 }
+
+export async function getServiceById(ServiceObject){
+    try {
+        const token = localStorage.getItem('token');
+        const response = await AxiosInstance.get('/service/getServiceById' , {
+            headers:{
+                'x-access-token':token
+            },
+            params: ServiceObject
+        });
+        return response.data;
+    } catch (error) {
+        console.log("Something went wrong");
+        throw error;
+    }
+}
