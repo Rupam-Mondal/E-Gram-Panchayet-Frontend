@@ -38,7 +38,7 @@ function Allapplication() {
                 {data?.data?.map((v, i) => (
                     <div
                         key={i}
-                        className="flex items-center bg-white border border-gray-200 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+                        className="flex cursor-pointer items-center bg-white border border-gray-200 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
                     >
                         {/* Image Section */}
                         <div className="flex-shrink-0">
@@ -53,6 +53,9 @@ function Allapplication() {
                         <div className="ml-6">
                             <div className="text-xl font-semibold text-gray-800">
                                 {v?.service?.title || 'No Title Available'}
+                            </div>
+                            <div>
+                                username : {v?.user?.username}
                             </div>
                             <div className="text-md font-medium mt-2">
                                 Status: {" "}
