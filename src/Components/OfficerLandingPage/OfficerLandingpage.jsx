@@ -4,12 +4,14 @@ import AllServices from "../Allservices/Allservices";
 import TypingAnimation from "../ui/typing-animation";
 import { useCreateServiceContext } from "@/Hooks/ContextHooks/useCreateServiceContext";
 import AvatarCircles from "../ui/avatar-circles";
+import { useNavigate } from "react-router-dom";
 
 function OfficerLandingpage() {
     const { openModal, setOpenModal } = useCreateServiceContext();
     function Openmodal(){
         setOpenModal(true);
     }
+    const navigate = useNavigate();
     const avatars = [
         {
             imageUrl: "https://avatars.githubusercontent.com/u/16860528",
@@ -60,7 +62,11 @@ function OfficerLandingpage() {
                         <AvatarCircles numPeople={99} avatarUrls={avatars} />
 
                         {/* Arrow Button */}
-                        <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition duration-200">
+                        <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition duration-200"
+                            onClick={() => {
+                                navigate('/Applications')
+                            }}
+                        >
                             <svg
                                 className="w-6 h-6 text-gray-600 hover:text-gray-800"
                                 xmlns="http://www.w3.org/2000/svg"
