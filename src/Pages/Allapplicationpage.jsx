@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useGetApplicationOnProgress } from "@/Hooks/ApiHooks/useGetApplicationProgress";
+import { useQueryClient } from "@tanstack/react-query";
+
+import { useEffect, useState } from "react";
 
 function Allapplication() {
     const [status, setStatus] = useState('Applied');
+    const { data, isSuccess, isError, isFetching } = useGetApplicationOnProgress(status);
+    const queryClient = useQueryClient();
+    useEffect(() => {
+        queryClient.invalidateQueries(['ApplicationsProgress'])
+    } , [status])
     return (
         <>
             <div className="px-20 py-4 flex justify-between items-center text-gray-700 bg-gray-50 border border-gray-200 rounded-lg shadow-sm">
