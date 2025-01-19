@@ -4,10 +4,16 @@ import { Button } from "@/components/ui/button";
 import BoxReveal from "@/components/ui/box-reveal";
 import { InteractiveHoverButton } from "@/Components/ui/interactive-hover-button";
 import { RainbowButton } from "@/Components/ui/rainbow-button";
+import { useCreateApplicationContext } from "@/Hooks/ContextHooks/useCreateApplicationContext";
 
 function Servicepage() {
     const { Id } = useParams();
     const { data, isSuccess, isFetching, error } = useGetServiceById(Id);
+    const { openModal, setOpenModal } = useCreateApplicationContext();
+    function ModalOpen(){
+        console.log(openModal)
+        setOpenModal(true);
+    }
 
     return (
         <div className="flex flex-col items-center justify-center bg-gradient-to-r from-blue-100 to-indigo-200 min-h-screen py-12 px-6">
@@ -39,7 +45,9 @@ function Servicepage() {
             </BoxReveal>
 
             <BoxReveal boxColor="#A3BFFA" duration={0.7}>
-                <RainbowButton className='mt-4'>Apply</RainbowButton>
+                <RainbowButton className='mt-4'
+                    onClick={ModalOpen}
+                >Apply</RainbowButton>
             </BoxReveal>
         </div>
     );
