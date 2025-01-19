@@ -15,3 +15,19 @@ export async function GetApplicationByProgress(Object){
         throw error;
     }
 }
+
+export async function GetApplicationById(ApplicationObject){
+    try {
+        const token = localStorage.getItem('token');
+        const response = await AxiosInstance.get('/Application/getdetails' , {
+            headers:{
+                'x-access-token':token
+            },
+            params:ApplicationObject
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
