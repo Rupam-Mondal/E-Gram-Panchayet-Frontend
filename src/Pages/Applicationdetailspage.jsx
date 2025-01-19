@@ -1,5 +1,5 @@
 import { useGetApplicationById } from "@/Hooks/ApiHooks/useGetApplicationById";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 
 function ApplicationDetailsPage() {
@@ -8,6 +8,10 @@ function ApplicationDetailsPage() {
 
     const [progress, setProgress] = useState("");
     const [updateMessage, setUpdateMessage] = useState("");
+    const navigate = useNavigate();
+    function browsimage(src){
+        window.open(src, "_blank");
+    }
 
     const handleUpdateProgress = async () => {
         // Mock API call for updating progress (replace with actual API call)
@@ -72,7 +76,10 @@ function ApplicationDetailsPage() {
                                     key={index}
                                     src={doc.image}
                                     alt={`Document ${index + 1}`}
-                                    className="h-20 w-20 rounded-lg shadow-md object-cover border border-gray-200"
+                                    className="h-20 w-20 rounded-lg cursor-pointer shadow-md object-cover border border-gray-200"
+                                    onClick={() => {
+                                        browsimage(doc.image)
+                                    }}
                                 />
                             ))
                         ) : (
