@@ -1,15 +1,20 @@
 import { useGetApplicationOnProgress } from "@/Hooks/ApiHooks/useGetApplicationProgress";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Allapplication() {
     const [status, setStatus] = useState('Applied');
     const { data, isSuccess, isError, isFetching } = useGetApplicationOnProgress(status);
     const queryClient = useQueryClient();
+    const navigate = useNavigate();
 
     useEffect(() => {
         queryClient.invalidateQueries(['ApplicationsProgress']);
     }, [status]);
+    function HandleClick(Id){
+        navigate(`/Applications/details/${Id}`);
+    }
 
     return (
         <>
@@ -39,6 +44,9 @@ function Allapplication() {
                     <div
                         key={i}
                         className="flex cursor-pointer items-center bg-white border border-gray-200 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+                        onClick={() => {
+                            HandleClick(v?._id);
+                        }}
                     >
                         {/* Image Section */}
                         <div className="flex-shrink-0">
