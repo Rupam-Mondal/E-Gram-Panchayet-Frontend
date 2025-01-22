@@ -31,3 +31,18 @@ export async function GetApplicationById(ApplicationObject){
         throw error;
     }
 }
+
+export async function CreateApplication(Formdata){
+    try {
+        const token = localStorage.getItem('token');
+        const response = await AxiosInstance.post('/Application/createApplication' , Formdata , {
+            headers:{
+                'x-access-token':token
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
