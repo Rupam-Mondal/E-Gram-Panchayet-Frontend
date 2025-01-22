@@ -6,13 +6,15 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
+import { useCreateApplication } from "@/Hooks/ApiHooks/useCreateApplication";
 import { useCreateApplicationContext } from "@/Hooks/ContextHooks/useCreateApplicationContext";
 import { useState } from "react";
 
-function CreateApplication() {
+function CreateApplication({Id}) {
     const { openModal, setOpenModal } = useCreateApplicationContext();
     const [comments, setComments] = useState("");
     const [images, setImages] = useState([]);
+    const { isPending, isSuccess, isError, mutateAsync:createApplication } = useCreateApplication();
 
     function handleClose(){
         setOpenModal(0);
@@ -25,18 +27,16 @@ function CreateApplication() {
         setImages(updatedImages);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const formData = new FormData();
 
-        formData.append("service", comments);
+        formData.append("comment", comments);
+        formData.append("service" , Id);
 
         images.forEach((image, idx) => {
             if (image) formData.append(`image_${idx + 1}`, image);
         });
-        console.log("FormData entries:");
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}:`, value);
-        }
+        await createApplication(formData);
         handleClose();
     };
 

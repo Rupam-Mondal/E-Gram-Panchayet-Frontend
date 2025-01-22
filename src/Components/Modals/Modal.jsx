@@ -5,7 +5,6 @@ function Modal() {
     return (
         <>
             <CreateServiceModal/>
-            <CreateApplication/>
         </>
     )
 }
