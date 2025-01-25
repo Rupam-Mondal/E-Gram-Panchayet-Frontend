@@ -5,7 +5,7 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-} from "@/components/ui/dialog";
+} from "../ui/dialog";
 import { useCreateApplication } from "@/Hooks/ApiHooks/useCreateApplication";
 import { useCreateApplicationContext } from "@/Hooks/ContextHooks/useCreateApplicationContext";
 import { useState } from "react";
