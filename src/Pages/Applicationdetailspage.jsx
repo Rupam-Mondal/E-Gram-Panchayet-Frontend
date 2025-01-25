@@ -1,6 +1,7 @@
 import { useGetApplicationById } from "@/Hooks/ApiHooks/useGetApplicationById";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import { useUpdateApplication } from "@/Hooks/ApiHooks/useUpdateApplication";
 
 function ApplicationDetailsPage() {
     const { Id } = useParams();
@@ -9,15 +10,21 @@ function ApplicationDetailsPage() {
     const [progress, setProgress] = useState("");
     const [updateMessage, setUpdateMessage] = useState("");
     const navigate = useNavigate();
+    const { isPending:UpdatePending, isSuccess:UpdateSuccess, error, mutateAsync:Updateprogress } = useUpdateApplication()
     function browsimage(src){
         window.open(src, "_blank");
     }
 
     const handleUpdateProgress = async () => {
-        // Mock API call for updating progress (replace with actual API call)
         try {
-            // Simulating a successful update
-            setUpdateMessage("Progress updated successfully!");
+            const Object = {
+                id:Id,
+                progress:progress
+            };
+
+            await Updateprogress(Object);
+            setUpdateMessage("Application Updated Successfully");
+
         } catch (error) {
             setUpdateMessage("Failed to update progress. Try again.");
         }

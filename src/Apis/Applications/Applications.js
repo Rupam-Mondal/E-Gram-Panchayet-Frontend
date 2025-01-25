@@ -46,3 +46,17 @@ export async function CreateApplication(Formdata){
         throw error;
     }
 }
+export async function UpdateApplication(UpdateObject){
+    try {
+        const token = localStorage.getItem('token');
+        const response = await AxiosInstance.post('/Application/updateApplication' , UpdateObject , {
+            headers:{
+                'x-access-token':token,
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
