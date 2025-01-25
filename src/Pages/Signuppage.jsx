@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import Signoptions from "../Components/SignupOptions";
-import { CoolMode } from "@/Components/ui/cool-mode";
-import { Button } from "@/Components/ui/button";
 import Signupcard from "@/Components/Signupcard/Signupcard";
 import useSignup from "@/Hooks/ContextHooks/useSignup";
 

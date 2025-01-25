@@ -1,8 +1,6 @@
 import { useGetServiceById } from "@/Hooks/ApiHooks/useGetService";
 import { useParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import BoxReveal from "@/components/ui/box-reveal";
-import { InteractiveHoverButton } from "@/Components/ui/interactive-hover-button";
 import { RainbowButton } from "@/Components/ui/rainbow-button";
 import { useCreateApplicationContext } from "@/Hooks/ContextHooks/useCreateApplicationContext";
 import CreateApplication from "@/Components/Modals/CreateApplication";
