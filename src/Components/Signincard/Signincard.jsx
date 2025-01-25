@@ -5,7 +5,7 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
+} from "../ui/card";
 import useSignin from "@/Hooks/ApiHooks/useSiginin";
 import { Loader, TriangleAlertIcon } from "lucide-react";
 import { useEffect, useState } from "react";
