@@ -1,4 +1,5 @@
 # Digital Panchayet
+- [Demo](https://e-gram-panchayet-frontend-j4io.vercel.app/home)
 ## User and Officer Roles
 
 - **Officer Landing Page**: Officers have a different landing page with additional functionalities.
